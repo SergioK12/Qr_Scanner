@@ -12,9 +12,7 @@ class QrReader extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       initialRoute: 'Home',
-      routes: {
-        'Home':(context) => const HomePage()
-      },
+      routes: {'Home': (context) => const HomePage()},
     );
   }
 }
