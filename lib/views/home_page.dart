@@ -32,7 +32,15 @@ class _HomePageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final uiprovider = Provider.of<UiProvider>(context);
     final indice = uiprovider.selectedMenuOption;
-    DBProvider.db.database;
+    //DBProvider.db.getSacnbyID(2).then((scan) => print(scan!.valor.toString()));
+    // ignore: avoid_print
+    DBProvider.db.borrartodo().then(print);
+    // final tempscan = ScanModel(valor: 'https://google.com');
+    // final tempscan2 = ScanModel(valor: 'https://google.com');
+    // final tempscan3 = ScanModel(valor: 'https://google.com');
+    // DBProvider.db.nuevoScanRaw(tempscan);
+    // DBProvider.db.nuevoScanRaw(tempscan2);
+    // DBProvider.db.nuevoScanRaw(tempscan3);
 
     switch (indice) {
       case 1:
