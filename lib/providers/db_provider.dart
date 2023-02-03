@@ -79,9 +79,9 @@ class DBProvider {
     final db = await database;
 
     final res =
-        await db.rawQuery(''' SELECT * FROM SCANS WHERE TIPO = $tipo''');
+        await db.rawQuery(''' SELECT * FROM SCANS WHERE tipo = $tipo''');
 
-    return res.isNotEmpty ? res.map((e) => ScanModel.fromJson(e)).toList() : [];
+    return res.isNotEmpty ? res.map((e) => ScanModel.fromJson(e)).toList() : <ScanModel>[];
   }
 
   Future<int> actualizar(ScanModel scanModel) async {
