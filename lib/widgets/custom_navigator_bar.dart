@@ -17,8 +17,8 @@ class CustomNavigatioBar extends StatelessWidget {
       currentIndex: indiceactual,
       elevation: 0,
       items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Inicio"),
         BottomNavigationBarItem(icon: Icon(Icons.map_rounded), label: "Mapa"),
+        BottomNavigationBarItem(icon: Icon(Icons.wifi), label: "Http"),
       ],
     );
   }
