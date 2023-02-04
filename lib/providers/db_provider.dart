@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_scanner/models/scan_model.dart';
+export 'package:qr_scanner/models/scan_model.dart';
 import 'package:sqflite/sqflite.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
@@ -21,9 +22,11 @@ class DBProvider {
     Directory docDirectory = await getApplicationDocumentsDirectory();
     final path = join(docDirectory.path, 'ScanDB.db');
     debugPrint(path);
+
     return await openDatabase(
       path,
       version: 1,
+      onOpen: (db) {},
       onCreate: (db, version) async {
         await db.execute('''
         CREATE TABLE Scans(
@@ -46,12 +49,13 @@ class DBProvider {
 
     final res = await db.rawInsert('''
     INSERT INTO Scans(id, tipo, valor)
-    VALUES ($id, '$tipo', '$val')''');
+    VALUES ($id, '$tipo', '$val')
+    ''');
 
     return res;
   }
 
-  Future<int> nuevoSca(ScanModel nuevo) async {
+  Future<int> nuevoScan(ScanModel nuevo) async {
     final db = await database;
 
     final res = await db.insert('Scans', nuevo.toJson());
@@ -72,16 +76,20 @@ class DBProvider {
 
     final res = await db.query('Scans');
 
-    return res.isNotEmpty ? res.map((e) => ScanModel.fromJson(e)).toList() : [];
+    return res.isNotEmpty
+          ? res.map( (s) => ScanModel.fromJson(s) ).toList()
+          : [];
   }
 
   Future<List<ScanModel>> getTodosSacnsporTipo(String tipo) async {
     final db = await database;
 
-    final res =
-        await db.rawQuery(''' SELECT * FROM SCANS WHERE TIPO = $tipo''');
-
-    return res.isNotEmpty ? res.map((e) => ScanModel.fromJson(e)).toList() : [];
+    final res = await db.rawQuery(''' 
+        SELECT * FROM SCANS WHERE tipo = '$tipo'
+        ''');
+    return res.isNotEmpty
+        ? res.map((e) => ScanModel.fromJson(e)).toList()
+        : <ScanModel>[];
   }
 
   Future<int> actualizar(ScanModel scanModel) async {
