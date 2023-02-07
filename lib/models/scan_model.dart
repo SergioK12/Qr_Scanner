@@ -7,7 +7,7 @@ String scanModelToJson(ScanModel data) => json.encode(data.toJson());
 class ScanModel {
   ScanModel({
     this.id,
-   this.tipo,
+    this.tipo,
     required this.valor,
   }) {
     if ( valor.contains('http') ) {

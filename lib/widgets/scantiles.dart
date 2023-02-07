@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qr_scanner/utils/util.dart';
 
 import '../providers/scan_list_provide.dart';
 
@@ -35,7 +36,7 @@ class ScanTiles extends StatelessWidget {
             color: Colors.amber,
           ),
           // ignore: avoid_print
-          onTap: () => print(scans[index].id.toString()),
+          onTap: () => launchurl(context, scans[index]),
         ),
       ),
     );
